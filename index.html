@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gak Tau</title>
+    <style>
+        body {
+            background: #121212;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 { margin-bottom: 40px; font-weight: 300; letter-spacing: 2px; }
+
+        .gallery {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 300px;
+            border: 2px solid transparent;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .card h3 {
+            margin: 15px 0 5px;
+            font-size: 1.1rem;
+        }
+
+        .card p {
+            color: #b3b3b3;
+            font-size: 0.8rem;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    <h3>ANJAY ULTAH KE 91 GAK SIHH?</h3>
+
+    <div class="gallery">
+        <div class="card" onclick="playMusic('audio1', this)">
+            <img src="./gambar-1.jpeg" alt="Lagu 1">
+            <h3>Tersangka ultah ke 91 tahun</h3>
+            <p>Dipencet fotonya nanti ada surprise wkwk</p>
+            <audio id="audio1" src="./audio-1.mp3"></audio>
+        </div>
+
+        <div class="card" onclick="playMusic('audio3', this)">
+            <img src="./gambar-2.jpeg" alt="Lagu 3">
+            <h3>Ketua geng mbut?</h3>
+            <p>Dipencet fotonya nanti ada surprise wkwk</p>
+            <audio id="audio3" src="./audio-3.mp3"></audio>
+        </div>
+    </div>
+
+    <script>
+        function playMusic(id, element) {
+            // Ambil semua audio di halaman
+            const allAudios = document.querySelectorAll('audio');
+            const allCards = document.querySelectorAll('.card');
+            const targetAudio = document.getElementById(id);
+
+            // Jika lagu yang diklik sedang berputar, maka matikan
+            if (!targetAudio.paused) {
+                targetAudio.pause();
+                element.classList.remove('playing');
+                return;
+            }
+
+            // Matikan semua lagu lain & hapus efek kartu sebelum memutar yang baru
+            allAudios.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0; // Reset ke awal
+            });
+            allCards.forEach(card => card.classList.remove('playing'));
+
+            // Putar lagu yang dipilih
+            targetAudio.play();
+            element.classList.add('playing');
+        }
+    </script>
+<br> <br> <br> <br> <br> <br>
+</body>
+</html>
